@@ -47,7 +47,7 @@
   <main class="main py-5" style="min-height: 85vh; background-color: rgb(233, 243, 232);">
   <div class="container">
     <div class="row justify-content-center">
-      
+
       <!-- FORM REGISTRASI -->
       <div class="col-lg-7">
         <div class="card shadow-sm border-0">
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-primary">REGISTRASIKAN</button>
+                  <button type="submit" class="btn btn-success">REGISTRASIKAN</button>
                   <a href="/" class="btn btn-warning">BATAL</a>
                 </div>
               </div>
@@ -236,7 +236,13 @@
 
     const optionsByTipe = {
       SMA: ['IPA', 'IPS', 'Bahasa'],
-      SMK: ['Teknik Komputer', 'Multimedia', 'Akuntansi', 'RPL', 'Pertanian'],
+      SMK: ['Teknik Komputer dan Jaringan',
+            'Rekayasa Perangkat Lunak',
+            'Akuntansi dan Keuangan Lembaga',
+            'Teknik dan Bisnis Sepeda Motor',
+            'Agribisnis Tanaman Pangan',
+            'Agribisnis Tanaman Pangan dan Hortikultura',
+            'Agribisnis Pengolahan Hasil Pertanian'],
       MA: ['IPA', 'IPS', 'Agama']
     };
 

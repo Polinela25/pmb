@@ -25,7 +25,7 @@
                     <h5 class="card-header">Daftar Mahasiswa Baru</h5>
                 </div>
                 <div class="col-lg-6 text-end">
-                    <a href="/admin/mahasiswa/add" class="btn btn-primary me-3 mt-3"><i class='bx bxs-message-alt-add'></i> Tambah</a>
+                    <a href="/admin/cmshbaru/add" class="btn btn-primary me-3 mt-3"><i class='bx bxs-message-alt-add'></i> Tambah</a>
                 </div>
                 <div class="col-lg-12">
     <div class="table-responsive">
@@ -50,7 +50,7 @@
                         <td><?= esc($row['nama_jurusan']); ?></td>
                         <td><?= esc($row['nama_prodi']); ?></td>
                         <td>
-                            <a href="/admin/mahasiswa/edit/<?= encrypt_url($row['id']); ?>" class="btn btn-sm btn-success"><i class='bx bx-edit-alt'></i></a>
+                            <a href="/admin/cmshbaru/edit/<?= encrypt_url($row['id']); ?>" class="btn btn-sm btn-success"><i class='bx bx-edit-alt'></i></a>
                             <a href="#" onclick="confirmDeleteMahasiswa('<?= encrypt_url($row['id']); ?>')" class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></a>
                         </td>
                     </tr>

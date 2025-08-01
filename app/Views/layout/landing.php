@@ -43,14 +43,14 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">PMB Polinela</h1>
+        <h1 class="sitename" style= "color: rgb(55, 128, 48);">PMB Polinela</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
          <ul>
           <li><a href="/" class="active">Home</a></li>
           <li><a href="login">Login</a></li>
-          
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -68,8 +68,9 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center">
           <h3>Sudah punya akun! Login disini.</h3>
           <div>
-            <a href="login" class="btn-get-started">Login</a>
+            <a href="login" class="btn-get-started mb-4 mb-lg-0">Login</a>
           </div>
+
         </div>
 
           <div class="col-lg-6 order-1 order-lg-2">
@@ -78,47 +79,8 @@
         </div>
       </div>
     </section>
- <section id="services" class="services section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        
-        <div><span>Pendaftaran Online</span></div>
-      </div><!-- End Section Title -->
-<h5 align="center">
-  Daftar pendaftaran online berdasarkan jalur penerimaan mahasiswa baru<br>
-  seleksi Politeknik Negeri Lampung yang dibuka pada tahun 2025.
-</h5>
-<br>
-<h5 align="center">
-  Sebelum mengklik tombol 'DAFTAR', pastikan bahwa jalur seleksi yang ada<br>
-  dipilih sudah sesuai dan benar!
-</h5>
-<br><br>
-
-     <div class="container">
-  <div class="row gy-4">
-    <div class="col-lg-10 col-md-6 mx-auto" data-aos="fade-up" data-aos-delay="100">
-      <div class="service-item position-relative border rounded p-4 shadow-sm">
-
-        <!-- Header: Judul dan Tombol -->
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <h3 class="mb-0">SMBP-PAN</h3>
-          <a href="register" class="btn btn-sm btn-success">Daftar</a>
-        </div>
-
-        <!-- Deskripsi -->
-        <p class="mb-0">
-          Seleksi Mahasiswa Baru Polinela Jalur Prestasi Akademik dan Nonakademik <br>
-Seleksi Prestasi Akademik dan Non Akademik 2025
-        </p>
-
-      </div>
-    </div>
-  </div>
-</div>
- </section>
-<section id="features" class="features section light-background">
+<section id="features" class="section pt-0">
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
@@ -130,7 +92,7 @@ Seleksi Prestasi Akademik dan Non Akademik 2025
     <div class="row gy-5 justify-content-center">
 
       <!-- Gambar Kiri -->
-    
+
       <div class="col-xl-5 mt-4 mb-xl-0" data-aos="zoom-out" data-aos-delay="100">
         <img src="assets/assets/img/template/eStartup/informasi.png" class="img-fluid" alt="">
       </div>
@@ -171,7 +133,7 @@ Seleksi Prestasi Akademik dan Non Akademik 2025
   </div>
 
 </section>
-<section id="about-pmb" class="section pt-0">
+<section id="about-pmb" class="features section light-background">
   <div class="container" data-aos="fade-up">
 
     <!-- Section Title -->
@@ -242,7 +204,7 @@ Seleksi Prestasi Akademik dan Non Akademik 2025
       <div class="copyright text-center ">
         <p>© 2025 Aplikasi PMB Polinela</p>
       </div>
-     
+
     </div>
 
   </footer>

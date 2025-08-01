@@ -7,7 +7,7 @@
 <div class="row">
 
     <div class="col-lg-10 mb-4 order-0">
-        <form action="/admin/users/update" method="POST" enctype="multipart/form-data">
+        <form action="/admin/profile/update" method="POST" enctype="multipart/form-data">
 
             <div class="card mb-4">
                 <h5 class="card-header">Detail users</h5>
@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label for="nama" class="form-label">Username</label>
-                            <input class="form-control" type="text" id="nama" name="nama" disabled value="<?= $users->username ?>" />
+                            <input class="form-control" type="text" id="nama" name="nama"  value="<?= $users->username ?>" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="password" class="form-label">Password</label>

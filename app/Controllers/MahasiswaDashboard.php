@@ -14,7 +14,18 @@ class MahasiswaDashboard extends BaseController
     $mahasiswa = $model->where('users_id', $userId)->first();
 
     // Cek apakah profil belum lengkap
-    $profilTidakLengkap = !$mahasiswa || empty($mahasiswa['jurusan_id']) || empty($mahasiswa['prodi_id']) || empty($mahasiswa['tahun_id']) || empty($mahasiswa['tgl_lahir']);
+    $profilTidakLengkap = !$mahasiswa
+    || empty($mahasiswa['jurusan_id'])
+    || empty($mahasiswa['prodi_id'])
+    || empty($mahasiswa['tahun_id'])
+    || empty($mahasiswa['tgl_lahir'])
+    || empty($mahasiswa['nisn'])
+    || empty($mahasiswa['no_hp'])
+    || empty($mahasiswa['nama_sekolah'])
+    || empty($mahasiswa['tipe_sekolah'])
+    || empty($mahasiswa['jurusan_asal'])
+    || empty($mahasiswa['tahun_lulus']);
+
 
     return view('konten/mahasiswa/dashboard/index', [
         'disableForm' => $profilTidakLengkap,

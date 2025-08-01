@@ -19,11 +19,22 @@ class MahasiswaProfil extends BaseController
     public function index()
     {
         $usersId = session()->get('data')['id'];
-
+// dd($usersId);
         $mhsModel = new CmshBaruModel();
         $mahasiswa = $mhsModel->getByUsersId($usersId);
 
-        $profilTidakLengkap = !$mahasiswa || empty($mahasiswa['jurusan_id']) || empty($mahasiswa['prodi_id']) || empty($mahasiswa['tahun_id']) || empty($mahasiswa['tgl_lahir']);
+        $profilTidakLengkap = !$mahasiswa
+    || empty($mahasiswa['jurusan_id'])
+    || empty($mahasiswa['prodi_id'])
+    || empty($mahasiswa['tahun_id'])
+    || empty($mahasiswa['tgl_lahir'])
+    || empty($mahasiswa['nisn'])
+    || empty($mahasiswa['no_hp'])
+    || empty($mahasiswa['nama_sekolah'])
+    || empty($mahasiswa['tipe_sekolah'])
+    || empty($mahasiswa['jurusan_asal'])
+    || empty($mahasiswa['tahun_lulus']);
+
 
         $jurusanModel = new JurusanModel();
         $prodiModel = new ProdiModel();
@@ -37,7 +48,7 @@ class MahasiswaProfil extends BaseController
             'tahun' => $tahunModel->findAll(),
             'errors' => session('errors')
         ];
-
+// dd($data);
         return view('konten/mahasiswa/profil/index', $data);
     }
 
@@ -51,6 +62,12 @@ class MahasiswaProfil extends BaseController
         $jurusanId = $this->request->getPost('jurusan_id');
         $prodiId = $this->request->getPost('prodi_id');
         $tahunId = $this->request->getPost('tahun_id');
+        $nisn         = $this->request->getPost('nisn');
+        $namaSekolah  = $this->request->getPost('nama_sekolah');
+        $tipeSekolah  = $this->request->getPost('tipe_sekolah');
+        $jurusanAsal  = $this->request->getPost('jurusan_asal');
+        $tahunLulus   = $this->request->getPost('tahun_lulus');
+        $noHp         = $this->request->getPost('no_hp');
 
         $userData = [];
         $mhsData = [];
@@ -60,6 +77,7 @@ class MahasiswaProfil extends BaseController
         }
         if (!empty($nama)) {
             $userData['nama'] = $nama;
+             $mhsData['nama'] = $nama;
         }
 
         if (!empty($tglLahir)) {
@@ -74,7 +92,24 @@ class MahasiswaProfil extends BaseController
         if (!empty($tahunId)) {
             $mhsData['tahun_id'] = $tahunId;
         }
-
+        if (!empty($nisn)) {
+            $mhsData['nisn'] = $nisn;
+        }
+        if (!empty($namaSekolah)) {
+            $mhsData['nama_sekolah'] = $namaSekolah;
+        }
+        if (!empty($tipeSekolah)) {
+            $mhsData['tipe_sekolah'] = $tipeSekolah;
+        }
+        if (!empty($jurusanAsal)) {
+            $mhsData['jurusan_asal'] = $jurusanAsal;
+        }
+        if (!empty($tahunLulus)) {
+            $mhsData['tahun_lulus'] = $tahunLulus;
+        }
+        if (!empty($noHp)) {
+            $mhsData['no_hp'] = $noHp;
+        }
         if (!empty($userData)) {
             $this->userModel->update($usersId, $userData);
         }
@@ -88,6 +123,6 @@ class MahasiswaProfil extends BaseController
         }
 
         session()->setFlashdata('success', 'Profil berhasil diperbarui.');
-        return redirect()->to('/mahasiswa/profil');
+        return redirect()->to('/mahasiswa/profile');
     }
 }

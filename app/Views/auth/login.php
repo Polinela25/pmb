@@ -9,6 +9,7 @@
   <!-- Favicons -->
   <link href="/template/assets/img/logo/panglinela.png" rel="icon" />
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -31,7 +32,7 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl d-flex justify-content-between align-items-center">
       <a href="/" class="logo d-flex align-items-center">
-        <h1 class="sitename">PMB Polinela</h1>
+        <h1 class="sitename" style= "color: rgb(55, 128, 48);">PMB Polinela</h1>
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
@@ -44,7 +45,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="main py-5" style="min-height: 85vh; background-color: rgb(233, 243, 232);">
+  <main class="main d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px); background-color: rgb(233, 243, 232);">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-5">
@@ -55,13 +56,19 @@
               <img src="/template/assets/img/logo/logo.png" alt="Logo" class="img-fluid" style="max-width: 120px;">
             </div> -->
 
-            <h4 class="text-center mb-2"><h4>
-            <p class="text-center text-muted mb-4">Masukkan username dan password dengan benar.</p>
+
+            <h4 class="text-center text-muted mb-4">Masukkan username dan password dengan benar.</h4>
+          <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger alert-dismissible fade show position-relative px-3 py-2" role="alert" style="font-size: 0.925rem;">
+              <div class="pe-4"><?= session()->getFlashdata('error') ?></div>
+              <button type="button" class="btn-close position-absolute end-0 p-2" style="top: 0.25rem; font-size: 0.7rem;" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <?php endif; ?>
 
             <!-- Login Form -->
-            <form action="/auth/check-auth" method="POST">
+           <form action="/auth/check-auth" method="POST">
               <div class="mb-3">
-                <label for="email" class="form-label">Username</label>
+                <label for="email" class="form-label" style="font-size: 1.0rem;">Username</label>
                 <input type="text" name="username" id="email"
                   class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?>"
                   placeholder="Masukkan email atau username" autofocus>
@@ -71,13 +78,18 @@
               </div>
 
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password"
-                  class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
-                  placeholder="************">
-                <?php if (isset($errors['password'])): ?>
-                  <div class="invalid-feedback"><?= $errors['password'] ?></div>
-                <?php endif; ?>
+                <label for="password" class="form-label" style="font-size: 1.0rem;">Password</label>
+                <div class="input-group">
+                  <input type="password" name="password" id="password"
+                    class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
+                    placeholder="************">
+                  <span class="input-group-text" onclick="togglePassword()" style="cursor:pointer">
+                    <i class="bi bi-eye" id="toggleIcon"></i>
+                  </span>
+                  <?php if (isset($errors['password'])): ?>
+                    <div class="invalid-feedback d-block"><?= $errors['password'] ?></div>
+                  <?php endif; ?>
+                </div>
               </div>
 
               <div class="d-grid mb-3">
@@ -85,17 +97,15 @@
               </div>
 
               <div class="text-center">
-                <small><a href="/auth/register">Lupa Password</a></small>
+                <small><a href="/auth/register" style="font-size: 0.85rem;">Lupa Password</a></small>
               </div>
             </form>
-
           </div>
         </div>
       </div>
     </div>
   </div>
 </main>
-
 
   <!-- Section Informasi Kontak -->
   <section class="footer-top py-5 text-light" style="background-color: #2d2d2d;">
@@ -154,6 +164,21 @@
 
   <!-- Preloader -->
   <div id="preloader"></div>
+<script>
+function togglePassword() {
+  const password = document.getElementById('password');
+  const icon = document.getElementById('toggleIcon');
+  if (password.type === "password") {
+    password.type = "text";
+    icon.classList.remove("bi-eye");
+    icon.classList.add("bi-eye-slash");
+  } else {
+    password.type = "password";
+    icon.classList.remove("bi-eye-slash");
+    icon.classList.add("bi-eye");
+  }
+}
+</script>
 
   <!-- Vendor JS -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

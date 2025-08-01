@@ -10,8 +10,8 @@
 
     </li>
 
-    <li class="menu-item <?= ($request->uri->getSegment(2) === 'profil') ? 'active' : '' ?>">
-        <a href="/mahasiswa/profil" class="menu-link">
+    <li class="menu-item <?= ($request->uri->getSegment(2) === 'profile') ? 'active' : '' ?>">
+        <a href="/mahasiswa/profile" class="menu-link">
             <i class="menu-icon tf-icons bx bxs-user-pin"></i>
             <div data-i18n="">Profil</div>
         </a>

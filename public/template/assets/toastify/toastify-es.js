@@ -463,4 +463,3 @@ class Toastify {
     return new Toastify(options);
   }
 
-  export default StartToastifyInstance;

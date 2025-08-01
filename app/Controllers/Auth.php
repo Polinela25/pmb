@@ -110,7 +110,7 @@ class Auth extends BaseController
         } else {
             // Kasus jika username tidak ditemukan atau password salah
             session()->setFlashdata('error', 'Username atau Password salah.'); // tambahkan ini
-            return redirect()->to('/');
+            return redirect()->to('/login');
         }
     }
 

@@ -19,7 +19,7 @@
         }
     </style>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/template/assets/img/logo/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/template/assets/img/logo/panglinela.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -231,17 +231,6 @@
 
     <script src="/template/assets/bootstrap-select/bootstrap-select.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            new DataTable('#example');
-        });
-        $(document).ready(function(e) {
-            $('.selectpicker').selectpicker();
-        });
-        $(document).ready(function(e) {
-            $('.selectpickerThAkademik').selectpicker();
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
     </script>
     <script src="/template/assets/select2/select2.js"></script>
@@ -269,29 +258,6 @@
     <script src="/template/assets/toastify/toastify-es.js"></script>
     <script src="/template/assets/toastify/toastify.js"></script>
     <script src="/template/assets/toastify/script.js"></script>
-    <script>
-        function getServerTime() {
-            return fetch('<?= base_url('server') ?>')
-                .then(response => response.json())
-                .then(data => new Date(data.server_time));
-        }
-
-        function updateClock() {
-            getServerTime().then(currentTime => {
-                const hours = currentTime.getHours().toString().padStart(2, '0');
-                const minutes = currentTime.getMinutes().toString().padStart(2, '0');
-                const seconds = currentTime.getSeconds().toString().padStart(2, '0');
-                const timeString = hours + ':' + minutes + ':' + seconds;
-                document.getElementById('current-time').textContent = timeString;
-            });
-        }
-
-        // Update the clock every second
-        setInterval(updateClock, 1000);
-
-        // Initial update
-        updateClock();
-    </script>
 
     <script>
         <?php if (session()->getFlashData('success')) : ?>

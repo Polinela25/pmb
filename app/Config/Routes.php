@@ -35,11 +35,11 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
     // Admin
     // Admin Profile
     $routes->get('profile', 'AdminProfil::index');
-    
-    $routes->post('users/update', 'AdminProfil::updatePelanggan');
 
+    $routes->post('profile/update', 'AdminProfil::updateProfile');
+    $routes->get('users', 'AdminUsers::index');
     // });
-    // Product
+    // Jurusan
     $routes->get('kode/jurusan', 'AdminJurusan::index');
     $routes->get('kode/jurusan/add', 'AdminJurusan::add');
     $routes->post('kode/jurusan/save', 'AdminJurusan::save');
@@ -47,14 +47,15 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
     $routes->post('kode/jurusan/update/(:num)', 'AdminJurusan::update/$1');
     $routes->get('kode/jurusan/delete/(:num)', 'AdminJurusan::delete/$1');
 
-    // Kategori
+    // Mahasiswa
     $routes->get('cmshbaru', 'CmshBaru::cmshbaru');
-    $routes->get('cmshbaru/add', 'CmshBaru::add');
-    $routes->post('cmshbaru/save', 'CmshBaru::save');
+    $routes->get('admin/cmshbaru/add', 'CmshBaru::formImport');
+$routes->post('admin/cmshbaru/importExcel', 'CmshBaru::importExcel');
     $routes->get('cmshbaru/edit/(:any)', 'CmshBaru::editcmshbaru/$1');
     $routes->post('cmshbaru/edit/(:any)', 'CmshBaru::editCmshBaruPost/$1');
     $routes->get('cmshbaru/delete/(:any)', 'CmshBaru::deleteKategori/$1');
 
+    // Prodi
     $routes->get('kode/prodi', 'AdminProdi::index');
     $routes->get('kode/prodi/add', 'AdminProdi::add');
     $routes->post('kode/prodi/save', 'AdminProdi::save');
@@ -62,6 +63,7 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
     $routes->post('kode/prodi/update/(:num)', 'AdminProdi::update/$1');
     $routes->get('kode/prodi/delete/(:num)', 'AdminProdi::delete/$1');
 
+    // Tahun
     $routes->get('kode/tahun', 'AdminTahun::index');
     $routes->get('kode/tahun/add', 'AdminTahun::add');
     $routes->post('kode/tahun/save', 'AdminTahun::save');
@@ -69,6 +71,7 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
     $routes->post('kode/tahun/update/(:num)', 'AdminTahun::update/$1');
     $routes->get('kode/tahun/delete/(:num)', 'AdminTahun::delete/$1');
 
+    // Npm
     $routes->get('npm', 'AdminNpm::index');
     $routes->get('npm/add', 'AdminNpm::add');
     $routes->post('npm/save', 'AdminNpm::save');
@@ -81,20 +84,13 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
 $routes->group('mahasiswa', ['filter' => 'authenticate'], function ($routes) {
     // $routes->group("Admin", ["filter" => "auth"], function ($routes) {
     $routes->get('dashboard', 'MahasiswaDashboard::index', ['filter' => 'authenticate']);
-    
+
     $routes->get('searchNama', 'MahasiswaDashboard::searchNama');
     $routes->post('generateNpm', 'MahasiswaDashboard::generateNpm');
 
     // $routes->get('dashboard', 'PelangganDashboard::index');
-    $routes->get('profil', 'MahasiswaProfil::index');
-    $routes->post('profil/update', 'MahasiswaProfil::updateProfil');
+    $routes->get('profile', 'MahasiswaProfil::index');
+    $routes->post('profile/update', 'MahasiswaProfil::updateProfil');
 
-    $routes->get('product', 'PelangganProductController::product');
-    $routes->get('transaksi/add/(:any)', 'TransaksiPelanggan::add/$1');
-    $routes->post('transaksi/add', 'TransaksiPelanggan::store');
-    $routes->get('transaksi', 'TransaksiPelanggan::index');
- 
+
 });
-// $routes->get('pelanggan/dashboard', 'PelangganDashboard::index');
-// $routes->get('pelanggan/ari', 'Pelanggan::index');
-// $routes->get('pelanggan/product', 'PelangganProductController::product');

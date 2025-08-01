@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\Admin\CmshBaruModel;
-use App\Models\Admin\JurusanModel;
-use App\Models\Admin\ProdiModel;
-use App\Models\Admin\TahunModel;
+// use App\Models\Admin\JurusanModel;
+// use App\Models\Admin\ProdiModel;
+// use App\Models\Admin\TahunModel;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use App\Models\Admin\UsersModel;
+use CodeIgniter\I18n\Time;
 
 class CmshBaru extends BaseController
 {
@@ -21,84 +24,72 @@ class CmshBaru extends BaseController
         $data = [
             'cmshbaru' => $this->CmshBaruModel->getAllCmshBaru()
         ];
-
         return view('konten/admin/cmshbaru/index.php', $data);
     }
 
-    public function add()
+    public function formImport()
     {
-        $jurusanModel = new JurusanModel();
-        $prodiModel = new ProdiModel();
-        $tahunModel = new TahunModel();
-
-        $data = [
-            'jurusan' => $jurusanModel->findAll(),
-            'prodi'   => $prodiModel->findAll(),
-            'tahun'   => $tahunModel->findAll()
-        ];
-
-        return view('konten/admin/cmshbaru/add.php', $data);
+        return view('konten/admin/cmshbaru/import_excel');
     }
 
-    public function save()
+    public function importExcel()
     {
-        $data = [
-            'nama'       => $this->request->getPost('nama'),
-            'jurusan_id' => $this->request->getPost('jurusan_id'),
-            'prodi_id'   => $this->request->getPost('prodi_id'),
-            'tahun_id'   => $this->request->getPost('tahun_id'),
-        ];
+        $file = $this->request->getFile('file_excel');
 
-        $this->CmshBaruModel->save($data);
-        return redirect()->to('/admin/cmshbaru');
-    }
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $reader = new Xlsx();
+            $spreadsheet = $reader->load($file->getTempName());
+            $sheet = $spreadsheet->getActiveSheet()->toArray();
 
-    public function editcmshbaru($id)
-    {
-        $jurusanModel = new JurusanModel();
-        $prodiModel = new ProdiModel();
-        $tahunModel = new TahunModel();
+            $userModel = new UsersModel();
 
-        $data = [
-            'mahasiswa' => $this->CmshBaruModel->getByIdWithJoin(decrypt_url($id)),
-            'jurusan'   => $jurusanModel->findAll(),
-            'prodi'     => $prodiModel->findAll(),
-            'tahun'     => $tahunModel->findAll(),
-            'errors'    => session('errors'),
-        ];
+            for ($i = 1; $i < count($sheet); $i++) {
+                $row = $sheet[$i];
 
-        return view('konten/admin/cmshbaru/edit.php', $data);
-    }
+                $kodePeserta  = trim($row[1]);
+                $nama         = trim($row[2]);
+                $nisn         = trim($row[3]);
+                $tglLahir     = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[4])->format('Y-m-d');
+                $namaSekolah  = trim($row[5]);
+                $tipeSekolah  = trim($row[6]);
+                $jurusanAsal  = trim($row[7]);
+                $tahunLulus   = trim($row[8]);
+                $email        = trim($row[9]);
+                $noHp         = trim($row[10]);
 
-    public function editCmshBaruPost($id)
-    {
-        $validation = $this->validate([
-            'nama' => 'required',
-            'jurusan_id' => 'required',
-            'prodi_id' => 'required',
-            'tahun_id' => 'required',
-        ]);
+                // Simpan ke tabel users
+                $username = $kodePeserta;
+                $password = date('Ymd', strtotime($tglLahir)); // password: YYYYMMDD
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if (!$validation) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                $userId = $userModel->insert([
+                    'username' => $username,
+                    'password' => $hashedPassword,
+                    'role_id'  => 2, // mahasiswa
+                    'created_at' => Time::now(),
+                    'updated_at' => Time::now(),
+                ], true); // dapatkan inserted ID
+
+                // Simpan ke tabel mahasiswa
+                $this->CmshBaruModel->insert([
+                    'nisn' => $nisn,
+                    'nama' => $nama,
+                    'tgl_lahir' => $tglLahir,
+                    'nama_sekolah' => $namaSekolah,
+                    'tipe_sekolah' => $tipeSekolah,
+                    'jurusan_asal' => $jurusanAsal,
+                    'tahun_lulus' => $tahunLulus,
+                    'email' => $email,
+                    'no_hp' => $noHp,
+                    'created_at' => Time::now(),
+                    'updated_at' => Time::now(),
+                    'users_id' => $userId
+                ]);
+            }
+
+            return redirect()->to('/admin/cmshbaru')->with('success', 'Data berhasil diimport dari Excel!');
         }
 
-        $data = [
-            'nama'       => $this->request->getPost('nama'),
-            'jurusan_id' => $this->request->getPost('jurusan_id'),
-            'prodi_id'   => $this->request->getPost('prodi_id'),
-            'tahun_id'   => $this->request->getPost('tahun_id'),
-        ];
-
-        $this->CmshBaruModel->updateData(decrypt_url($id), $data);
-        session()->setFlashdata('success', 'Berhasil mengubah data.');
-        return redirect()->to('/admin/cmshbaru');
-    }
-
-    public function deleteKategori($id)
-    {
-        $this->CmshBaruModel->delete(decrypt_url($id));
-        session()->setFlashdata('success', 'Berhasil menghapus data.');
-        return redirect()->to('/admin/cmshbaru');
+        return redirect()->back()->with('error', 'File tidak valid.');
     }
 }

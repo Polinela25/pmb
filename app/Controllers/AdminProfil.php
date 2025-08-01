@@ -21,7 +21,7 @@ class AdminProfil extends BaseController
         ];
         echo view('konten/admin/profil/index.php', $data);
     }
-    public function updatePelanggan()
+    public function updateProfile()
     {
         // Ambil ID dari session
         $id = session()->get('data')['id'];

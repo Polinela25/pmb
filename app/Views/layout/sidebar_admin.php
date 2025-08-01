@@ -1,61 +1,75 @@
 <ul class="menu-inner py-1">
-    <!-- Dashboards -->
     <?php $request = service('request'); ?>
+
+    <!-- Dashboard -->
     <li class="menu-item <?= ($request->uri->getSegment(2) === 'dashboard') ? 'active' : '' ?>">
-
         <a href="/admin/dashboard" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Dashboards">Dashboard</div>
+            <i class="menu-icon tf-icons bx bx-grid-alt"></i>
+            <div>Dashboard</div>
         </a>
-
     </li>
+
+    <!-- Profile -->
     <li class="menu-item <?= ($request->uri->getSegment(2) === 'profile') ? 'active' : '' ?>">
         <a href="/admin/profile" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-user"></i>
-            <div data-i18n="pps">Profile</div>
+            <i class="menu-icon tf-icons bx bx-user-circle"></i>
+            <div>Profile</div>
         </a>
     </li>
 
-    <li class="menu-item <?= ($request->uri->getSegment(2) === 'cmshbaru') ? 'active  ' : '' ?>">
+    <!-- Cmshbaru -->
+    <li class="menu-item <?= ($request->uri->getSegment(2) === 'cmshbaru') ? 'active' : '' ?>">
         <a href="/admin/cmshbaru" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-file"></i>
-            <div data-i18n="pps">Cmshbaru</div>
+            <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+            <div>Cmshbaru</div>
         </a>
     </li>
+
+    <!-- Users -->
+    <li class="menu-item <?= ($request->uri->getSegment(2) === 'users') ? 'active' : '' ?>">
+        <a href="/admin/users" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-group"></i>
+            <div>Users</div>
+        </a>
+    </li>
+
+    <!-- Kode (Jurusan, Prodi, Tahun) -->
     <li class="menu-item <?= (
-                                $request->uri->getSegment(3) === 'jurusan' ||
-                                $request->uri->getSegment(3) === 'prodi' ||
-                                $request->uri->getSegment(3) === 'tahun'
-                            ) ? 'active open' : '' ?>">
+        $request->uri->getSegment(3) === 'jurusan' ||
+        $request->uri->getSegment(3) === 'prodi' ||
+        $request->uri->getSegment(3) === 'tahun'
+    ) ? 'active open' : '' ?>">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-data"></i>
-            <div data-i18n="Dashboards">Kode</div>
+            <i class="menu-icon tf-icons bx bx-code-alt"></i>
+            <div>Kode</div>
         </a>
         <ul class="menu-sub">
             <li class="menu-item <?= ($request->uri->getSegment(3) === 'jurusan') ? 'active' : '' ?>">
                 <a href="/admin/kode/jurusan" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-time-five"></i>
-                    <div data-i18n="CRM">Kode Jurusan</div>
+                    <i class="menu-icon tf-icons bx bx-building"></i>
+                    <div>Kode Jurusan</div>
                 </a>
             </li>
             <li class="menu-item <?= ($request->uri->getSegment(3) === 'prodi') ? 'active' : '' ?>">
                 <a href="/admin/kode/prodi" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-briefcase"></i>
-                    <div data-i18n="Academy">Kode Prodi</div>
+                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                    <div>Kode Prodi</div>
                 </a>
             </li>
             <li class="menu-item <?= ($request->uri->getSegment(3) === 'tahun') ? 'active' : '' ?>">
                 <a href="/admin/kode/tahun" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                    <div data-i18n="Academy">Kode Tahun</div>
+                    <i class="menu-icon tf-icons bx bx-calendar"></i>
+                    <div>Kode Tahun</div>
                 </a>
             </li>
         </ul>
     </li>
-   <li class="menu-item <?= ($request->uri->getSegment(2) === 'npm') ? 'active  ' : '' ?>">
+
+    <!-- NPM -->
+    <li class="menu-item <?= ($request->uri->getSegment(2) === 'npm') ? 'active' : '' ?>">
         <a href="/admin/npm" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-file"></i>
-            <div data-i18n="pps">NPM</div>
+            <i class="menu-icon tf-icons bx bx-id-card"></i>
+            <div>NPM</div>
         </a>
     </li>
 </ul>
