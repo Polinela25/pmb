@@ -49,8 +49,9 @@ $routes->group('admin', ['filter' => 'authenticate'], function ($routes) {
 
     // Mahasiswa
     $routes->get('cmshbaru', 'CmshBaru::cmshbaru');
-    $routes->get('admin/cmshbaru/add', 'CmshBaru::formImport');
-$routes->post('admin/cmshbaru/importExcel', 'CmshBaru::importExcel');
+    $routes->get('cmshbaru/add', 'CmshBaru::add');
+    $routes->get('cmshbaru/formImport', 'CmshBaru::formImport');
+    $routes->post('cmshbaru/importExcel', 'CmshBaru::importExcel');
     $routes->get('cmshbaru/edit/(:any)', 'CmshBaru::editcmshbaru/$1');
     $routes->post('cmshbaru/edit/(:any)', 'CmshBaru::editCmshBaruPost/$1');
     $routes->get('cmshbaru/delete/(:any)', 'CmshBaru::deleteKategori/$1');
@@ -78,7 +79,6 @@ $routes->post('admin/cmshbaru/importExcel', 'CmshBaru::importExcel');
     $routes->get('npm/edit/(:num)', 'AdminNpm::edit/$1');
     $routes->post('npm/update/(:num)', 'AdminNpm::update/$1');
     $routes->get('npm/delete/(:num)', 'AdminNpm::delete/$1');
-
 });
 
 $routes->group('mahasiswa', ['filter' => 'authenticate'], function ($routes) {
@@ -91,6 +91,4 @@ $routes->group('mahasiswa', ['filter' => 'authenticate'], function ($routes) {
     // $routes->get('dashboard', 'PelangganDashboard::index');
     $routes->get('profile', 'MahasiswaProfil::index');
     $routes->post('profile/update', 'MahasiswaProfil::updateProfil');
-
-
 });

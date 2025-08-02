@@ -6,27 +6,53 @@ use CodeIgniter\Model;
 
 class CmshBaruModel extends Model
 {
+
     protected $table = 'mahasiswa';
     protected $primaryKey = 'id';
-    
-    protected $allowedFields = [
-    'nisn',
-    'nama',
-    'tgl_lahir',
-    'nama_sekolah',
-    'tipe_sekolah',
-    'jurusan_asal',
-    'tahun_lulus',
-    'email',
-    'no_hp',
-    'created_at',
-    'updated_at',
-    'users_id',       // tambahkan ini
-    'jurusan_id',     // tambahkan ini
-    'prodi_id',       // tambahkan ini
-    'tahun_id'        // tambahkan ini
-];
 
+    protected $allowedFields = [
+        // Field lama
+        'nisn',
+        'nama',
+        'tgl_lahir',
+        'nama_sekolah',
+        'tipe_sekolah',
+        'jurusan_asal',
+        'tahun_lulus',
+        'email',
+        'no_hp',
+        'agama',
+        'created_at',
+        'updated_at',
+        'users_id',
+        'jurusan_id',
+        'prodi_id',
+        'tahun_id',
+
+        // Field baru yang ditambahkan
+        'nik',
+        'kode_peserta',
+        'nomor_kip_k',
+        'nama_prodi_terima',
+        'jenjang_prodi_terima',
+        'pilihan_terima',
+        'alamat',
+        'tempat_lahir',
+        'telepon',
+        'nama_ayah',
+        'pendidikan_ayah',
+        'pekerjaan_ayah',
+        'penghasilan_ayah',
+        'nama_ibu',
+        'pendidikan_ibu',
+        'pekerjaan_ibu',
+        'penghasilan_ibu',
+        'jumlah_tanggungan',
+        'npsn',
+        'kab_sekolah',
+        'prov_sekolah',
+        'hasil_eligible'
+    ];
     protected $useTimestamps = true;
 
     public function getAllCmshBaru()
@@ -52,15 +78,14 @@ class CmshBaruModel extends Model
     {
         return $this->update($id, $data);
     }
-   public function getByUsersId($usersId)
-{
-    return $this->select('mahasiswa.*, jurusan.nama_jurusan, prodi.nama_prodi, tahun.kode_tahun, users.username, users.password')
-        ->join('jurusan', 'jurusan.id = mahasiswa.jurusan_id', 'left')
-        ->join('prodi', 'prodi.id = mahasiswa.prodi_id', 'left')
-        ->join('tahun', 'tahun.id = mahasiswa.tahun_id', 'left')
-        ->join('users', 'users.id = mahasiswa.users_id', 'left')
-        ->where('mahasiswa.users_id', $usersId)
-        ->first();
-}
-
+    public function getByUsersId($usersId)
+    {
+        return $this->select('mahasiswa.*, jurusan.nama_jurusan, prodi.nama_prodi, tahun.kode_tahun, users.username, users.password')
+            ->join('jurusan', 'jurusan.id = mahasiswa.jurusan_id', 'left')
+            ->join('prodi', 'prodi.id = mahasiswa.prodi_id', 'left')
+            ->join('tahun', 'tahun.id = mahasiswa.tahun_id', 'left')
+            ->join('users', 'users.id = mahasiswa.users_id', 'left')
+            ->where('mahasiswa.users_id', $usersId)
+            ->first();
+    }
 }
